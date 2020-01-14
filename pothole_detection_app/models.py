@@ -3,12 +3,20 @@ from django.utils import timezone
 from django.urls import reverse
 # Create your models here.
 
-class Post(models.Model):
+
+class app_User(models.Model):
+    first_name=models.CharField(max_length=50)
+    last_name=models.CharField(max_length=50)
+    email_id=models.EmailField()
+    password=models.CharField(max_length=100)
+    phone_number=models.IntegerField()
+
+class image_post(models.Model):
 
     image=models.FileField(null=True,blank=True)
     title = models.CharField(max_length=200)
     Description=models.CharField(max_length=200)
-    author=models.ForeignKey(app_User,on_delete=models.CASCADE)
+    app_user_field=models.ForeignKey(app_User,on_delete=models.CASCADE,default="")
     latitude=models.DecimalField(max_digits=10,decimal_places=8,null=True)
     longitude=models.DecimalField(max_digits=11,decimal_places=8,null=True)
     created_date = models.DateTimeField(default=timezone.now)
@@ -40,7 +48,7 @@ class accelometer_post(models.Model):
 
     title = models.CharField(max_length=200)
     Description = models.CharField(max_length=200)
-    author = models.ForeignKey(app_User, on_delete=models.CASCADE)
+    app_user_field= models.ForeignKey(app_User, on_delete=models.CASCADE,default="")
     latitude = models.DecimalField(max_digits=10, decimal_places=8, null=True)
     longitude = models.DecimalField(max_digits=11, decimal_places=8, null=True)
     created_date = models.DateTimeField(default=timezone.now)
@@ -64,10 +72,3 @@ class Vote_table(models.Model):
     class Meta:
         unique_together = ('user_id', 'post_id',)
 
-
-class app_User(models.Model):
-    first_name=models.CharField(max_length=50)
-    last_name=models.CharField(max_length=50)
-    email_id=models.EmailField()
-    password=models.CharField(max_length=100)
-    phone_number=models.IntegerField()

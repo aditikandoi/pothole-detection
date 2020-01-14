@@ -18,4 +18,37 @@ from django.urls import path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    #URLS API POSTS
+    #
+    # path("api/listallaccpost", views.PostList.as_view(), name="post_listAPI"),
+    # path("api/listallimagepost", views.PostList.as_view(), name="post_listAPI"),
+    # path("api/uploadimagepost/", views.send_post, name="post_listAPIModified"),
+    # path("api/deleteimagepost/<int:id>/", views.delete_post, name="delete post"),
+    #
+    # #URLS API USER
+    #
+    # path("api/listallusers", views.Garbage_UserList.as_view(), name="Garbage_UserListAPI"),
+    #
+    #  #not sure about this api
+    # # path("postAPI/<int:pk>/", views.PostDetail.as_view(), name="post_details"),
+    # # path("postAPI/<int:pk>/vote/", views.CreateVote.as_view(), name="create_vote"),
+    #
+    # path("api/appuser/login/", views.validate_Garbage_User_view, name="validate_Garbage_User"),
+    # path("api/appuser/register/", views.Register_Garbage_User, name="Register_Garbage_User"),
+    # path("api/userlikedpost/<int:uid>/", views.liked_post, name="getuserslikedspost"),
+    # path("api/getuserpost/<int:uid>/", views.get_users_post, name="getuserspost"),
+    # path("api/downvote/", views.downvote, name="downvote"),
+    # path("api/filterpost/", views.filter_posts, name="filterpost"),
+    # path("api/updateStatus/", views.update_status, name="updatestatus"),
+    #
+    #
+    #
+    #
+    #
+    # #API VOTES
+    #
+    # path("api/upvote/", views.upvote_view, name="Upvote"),
+    # path("api/upvotelist/", views.Vote_table_list.as_view(), name="UpvoteTable"),#gives upvote table
+
 ]
