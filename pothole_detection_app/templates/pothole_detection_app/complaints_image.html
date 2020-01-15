@@ -1,0 +1,69 @@
+{% extends "pothole_detection_app/base.html"%}
+
+{% block content%}  
+    <div style="padding: 20px;background:#ffffff; border-radius: 100px; margin: 20px;">    
+        <div class="division_for_Profile_Image" style="text-align: left; width: inherit; display: table-row">
+            {% if user.is_authenticated %}
+                <div style="display: table-cell;">
+                    <img class="rounded-circle article-img" style="height: 150px; width:150px" src="{{ user.profile.image.url }}">
+                </div>
+                <div style="display: table-cell; float: left;">
+                    <h2 style="display: inline-block;">{{ request.app_user.first_name }} {{request.app_user.last_name}}</h2>
+                </div>
+            {% endif %}
+    </div>
+    </div>
+    {%  for image_post in image_posts %}
+        <form method="POST" style="display: inline flow-root list-item; width: 55%;float: left;padding-right: 15px;">
+            {% csrf_token %}
+            <article class="media content-section">
+                <div class="media-body">
+                    <div class="article-metadata">
+                    <a class="mr-2" href="#" type="submit">Image Complain</a>
+                    </div>
+
+                    <p>Title: {{ image_post.title }}  <br>Created date: {{ image_post.created_date }}&nbsp; &nbsp;&nbsp; Published Date {{ image_post.published_date }}</p>
+                    <p class="article-content"> Latitute: {{ image_post.latitude }}  &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;Longitude: {{ image_post.longitude }}<br> Vote Count: {{ image_post.vote_count }} <br> Description: {{ image_post.Description }} <br>Adress: {{ image_post.address }}</p>
+                    <img src="{{ image_post.image.url }}" style="width: 300px;height:200px;">
+                    <br>
+                    <select style="padding-top: 15px;">
+                        <option value="Waiting for Acknowledgement">Waiting for Acknowledgement</option>
+                        <option value="Acknowledged">Acknowledged</option>
+                        <option value="Work in Progress">Work in Progress</option>
+                        <option value="Resolved">Resolved</option>
+                      
+                    </select>
+            
+                   
+                    
+                    
+                    <button type="submit" style="border-radius: 10px; color: whitesmoke;background: green; " name="updatebutton" value="{{ image_post.latitude }}">Update Status</button>
+                    <!-- <button type="submit" style="border-radius: 10px; color: whitesmoke;background: green; float: right;" name="predictionbutton" value="{{ y }}">Get Prediction</button>
+                    <button type="submit" style="border-radius: 10px; color: whitesmoke;background: green; float: right;" name="Tomorrow_Pred" value="{{ y }}">Get Predicted Numbers</button> -->
+
+  
+                </div>
+            </article>
+        </form>
+        <div id="map" style="width: 45%;height: 500px; background-color: grey; position: fixed;">
+
+        </div>
+        <script>
+            // Initialize and add the map
+            function initMap() {
+              // The location of Uluru
+              var uluru = {lat: 19.1250, lng: 72.8361};
+              // The map, centered at Uluru
+              var map = new google.maps.Map(
+                  document.getElementById('map'), {zoom: 14, center: uluru});
+              // The marker, positioned at Uluru
+              var marker = new google.maps.Marker({position: uluru, map: map});
+            }
+            </script>
+
+            <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6z_lkucqQ5OcEskgQgk31aQ2KLpecLiY&callback=initMap">
+            </script>
+        </div>
+    {% endfor %}
+{% endblock content %}
