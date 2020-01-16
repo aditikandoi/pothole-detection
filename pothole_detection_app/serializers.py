@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import app_User,image_post, accelometer_post,Vote_table
+from .models import app_User,image_post, accelometer_post,Vote_table,Vote_table_accelometer_post
 
 
 # class VoteSerializer(serializers.ModelSerializer):
@@ -32,4 +32,9 @@ class Vote_tableSerializer(serializers.ModelSerializer):
 
     class Meta:
         model=Vote_table
+        fields="__all__"
+
+class Vote_table_acc_post_serializer(serializers.ModelSerializer):
+    class Meta:
+        model=Vote_table_accelometer_post
         fields="__all__"

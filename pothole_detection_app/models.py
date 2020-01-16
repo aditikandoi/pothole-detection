@@ -53,7 +53,7 @@ class accelometer_post(models.Model):
     longitude = models.DecimalField(max_digits=11, decimal_places=8, null=True)
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
-    status = models.CharField(default="Waiting for Acknowledgement", max_length=10)
+    status = models.CharField(default="Waiting for Acknowledgement", max_length=50)
     vote_count = models.IntegerField(default=0)
     address = models.CharField(max_length=200, blank=True, null=True)
 
@@ -66,6 +66,14 @@ class accelometer_post(models.Model):
 
 
 class Vote_table(models.Model):
+    user_id=models.IntegerField()
+    post_id=models.IntegerField()
+
+    class Meta:
+        unique_together = ('user_id', 'post_id',)
+
+
+class Vote_table_accelometer_post(models.Model):
     user_id=models.IntegerField()
     post_id=models.IntegerField()
 
