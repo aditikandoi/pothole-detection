@@ -26,8 +26,8 @@ from django.conf.urls import url, include
 urlpatterns = [
 
     path('admin/', admin.site.urls),
-    path("",views.index,name="index"),
-    # path('app/', include('pothole_detection_app.urls')),
+    # path("",views.index,name="index"),
+    path('', include('pothole_detection_app.urls')),
 
 
     #URLS API POSTS

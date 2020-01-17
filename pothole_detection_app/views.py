@@ -477,6 +477,14 @@ def index(request):
 
 
 
+def image_comp(request):
+    image_post_list = image_post.objects.all()
+    return render(request, "pothole_app/complaints_image.html", {"image_posts":image_post_list})
+
+
+def accel_comp(request):
+    accel_post_list = accelometer_post.objects.all()
+    return render(request, "pothole_app/complaints_accel.html", {"accel_posts":accel_post_list})
 
 
 #Status API
