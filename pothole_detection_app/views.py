@@ -410,18 +410,28 @@ def get_users_accelometer_post(request, uid):
 def filter_image_posts(request):
 
     try:
+        logging.debug("checkbelow")
         to_send = []
         json_object=json.loads(request.body)[0]
         logging.debug(json_object)
+        logging.debug("checkabove")
+        logging.debug(radians(json_object["latitude"]))
+
         slat = radians(json_object["latitude"])
+        logging.debug("dsasa")
+
         slon = radians(json_object["longitude"])
         radius = json_object["radius"]
+        logging.debug("check3")
         all_posts = image_post.objects.all()
         i = 0
+
         for post in all_posts:
 
+            logging.debug("check for in")
             elat = radians(post.latitude)
             elon = radians(post.longitude)
+
 
             #
             # if 6371.01* acos(sin(slat) * sin(elat) + cos(slat) * cos(elat) * cos(slon - elon))<=radius:
@@ -431,11 +441,14 @@ def filter_image_posts(request):
             if 6371.01 * 1000 * acos(sin(slat) * sin(elat) + cos(slat) * cos(elat) * cos(slon - elon)) <= radius:
                 serializer = image_postSerializer(post)
                 to_send.append(serializer.data)
+            logging.debug("check for end")
 
         # logging.debug(list(to_send))
+        logging.debug(to_send)
         return Response(to_send)
     except Exception as e:
-        logging.debug(e)
+        logging.debug("chshus")
+        logging.debug(str(request.data))
         return Response(to_send)
 
 
